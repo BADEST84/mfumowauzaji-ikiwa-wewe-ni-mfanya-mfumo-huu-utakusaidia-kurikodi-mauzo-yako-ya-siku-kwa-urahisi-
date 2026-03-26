@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meneja wa Store za Mchele</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #f4f4f9, #e0f7fa);
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .store-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .store-title {
+            font-weight: bold;
+            color: #0056b3;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1.2em;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .results {
+            margin-top: 30px;
+            background-color: #dff0d8;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 15px;
+            color: white;
+        }
+        .save {
+            background-color: #007bff;
+        }
+        .save:hover {
+            background-color: #0056b3;
+        }
+        .delete {
+            background-color: #dc3545;
+        }
+        .delete:hover {
+            background-color: #b52a37;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>📦 Meneja wa Store za Mchele</h2>
+
+<div class="container">
+    <div class="store-box">
+        <span class="store-title">Store ya Nyumbani</span>
+        <label>Polo Kubwa</label>
+        <input type="number" id="s1-kubwa" value="0" oninput="pigaHesabu()">
+        <label>Polo Ndogo</label>
+        <input type="number" id="s1-ndogo" value="0" oninput="pigaHesabu()">
+    </div>
+
+    <div class="store-box">
+        <span class="store-title">Store 2</span>
+        <label>Polo Kubwa</label>
+        <input type="number" id="s2-kubwa" value="0" oninput="pigaHesabu()">
+        <label>Polo Ndogo</label>
+        <input type="number" id="s2-ndogo" value="0" oninput="pigaHesabu()">
+    </div>
+
+    <div class="store-box">
+        <span class="store-title">Store 3</span>
+        <label>Polo Kubwa</label>
+        <input type="number" id="s3-kubwa" value="0" oninput="pigaHesabu()">
+        <label>Polo Ndogo</label>
+        <input type="number" id="s3-ndogo" value="0" oninput="pigaHesabu()">
+    </div>
+
+    <div class="store-box">
+        <span class="store-title">Zilizohamishwa Kwerekwe</span>
+        <label>Polo Kubwa</label>
+        <input type="number" id="s4-kubwa" value="0" oninput="pigaHesabu()">
+        <label>Polo Ndogo</label>
+        <input type="number" id="s4-ndogo" value="0" oninput="pigaHesabu()">
+    </div>
+</div>
+
+<div class="results">
+    <h3>Jumla Polo Kubwa: <span id="jumla-kubwa">0</span></h3>
+    <h3>Jumla Polo Ndogo: <span id="jumla-ndogo">0</span></h3>
+    <hr>
+    <h2>📊 Jumla Mifuko Yote: <span id="jumla-kuu">0</span></h2>
+</div>
+
+<button class="save" onclick="hifadhiData()">💾 Hifadhi Data</button>
+<button class="delete" onclick="futaData()">🗑️ Futa Data</button>
+
+<script>
+    function pata(id) {
+        return document.getElementById(id);
+    }
+
+    function pigaHesabu() {
+        let s1k = Number(pata("s1-kubwa").value) || 0;
+        let s1n = Number(pata("s1-ndogo").value) || 0;
+        let s2k = Number(pata("s2-kubwa").value) || 0;
+        let s2n = Number(pata("s2-ndogo").value) || 0;
+        let s3k = Number(pata("s3-kubwa").value) || 0;
+        let s3n = Number(pata("s3-ndogo").value) || 0;
+        let s4k = Number(pata("s4-kubwa").value) || 0;
+        let s4n = Number(pata("s4-ndogo").value) || 0;
+
+        let totalKubwa = s1k + s2k + s3k + s4k;
+        let totalNdogo = s1n + s2n + s3n + s4n;
+
+        pata("jumla-kubwa").innerText = totalKubwa;
+        pata("jumla-ndogo").innerText = totalNdogo;
+        pata("jumla-kuu").innerText = totalKubwa + totalNdogo;
+    }
+
+    function hifadhiData() {
+        const data = {
+            s1k: pata("s1-kubwa").value,
+            s1n: pata("s1-ndogo").value,
+            s2k: pata("s2-kubwa").value,
+            s2n: pata("s2-ndogo").value,
+            s3k: pata("s3-kubwa").value,
+            s3n: pata("s3-ndogo").value,
+            s4k: pata("s4-kubwa").value,
+            s4n: pata("s4-ndogo").value
+        };
+
+        localStorage.setItem("dataMchele", JSON.stringify(data));
+        alert("✅ Data zimehifadhiwa vizuri");
+    }
+
+    function rudishaData() {
+        const data = JSON.parse(localStorage.getItem("dataMchele"));
+        if (!data) return;
+
+        pata("s1-kubwa").value = data.s1k;
+        pata("s1-ndogo").value = data.s1n;
+        pata("s2-kubwa").value = data.s2k;
+        pata("s2-ndogo").value = data.s2n;
+        pata("s3-kubwa").value = data.s3k;
+        pata("s3-ndogo").value = data.s3n;
+        pata("s4-kubwa").value = data.s4k;
+        pata("s4-ndogo").value = data.s4n;
+
+        pigaHesabu();
+    }
+
+    function futaData() {
+        if (confirm("Una uhakika unataka kufuta data zote?")) {
+            localStorage.removeItem("dataMchele");
+            location.reload();
+        }
+    }
+
+    window.onload = rudishaData;
+</script>
+
+</body>
+</html>
